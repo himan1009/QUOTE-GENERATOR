@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUOTE GENERATOR</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/dcabbbb5dd.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="quote-box">
+        <h2>QUOTE OF THE DAY</h2>
+        <blockquote id="quote">Loading...</blockquote>
+        <span id="author">Loading...</span>
+        <div>
+            <button onclick="getquote(api_url);">NEW QUOTE</button>
+            <button onclick="tweet()"><i class="fa-brands fa-twitter"></i>TWEET</button>
+        </div>
+    </div>
+    <script>
+        const quote=document.getElementById("quote");
+        const author=document.getElementById("author");
+        const api_url="https://api.quotable.io/random";
+        async function getquote(url){
+            const response=await fetch(url);
+            var data=await response.json(url);
+            quote.innerHTML=data.content;
+            author.innerHTML=data.author;
+        }
+        getquote(api_url);
+
+        function tweet(){
+            window.open("https://twitter.com/intent/tweet?text=" + quote.innerHTML, "Tweet Window", "width=400", "height=300");
+        }
+    </script>
+</body>
+</html>
